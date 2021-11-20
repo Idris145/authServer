@@ -3,9 +3,9 @@ const tokenModel = require('./token.model');
 
 exports.Login = function (req, res) {
     try {
-        const user = { name: req.body.name, email: req.body.email, role: req.body.role };
-        const accessToken = jwt.generateAccessToken(user);
-        const refreshToken = jwt.generateRefreshToken(user);
+        const minimal_user = { name: req.body.name, email: req.body.email, role: req.body.role };
+        const accessToken = jwt.generateAccessToken(req.body);
+        const refreshToken = jwt.generateRefreshToken(minimal_user);
         var token = new tokenModel({ name: req.body.name, email: req.body.email, role: req.body.role, token: refreshToken });
         token.save((err, result) => {
             if (err) {
@@ -51,15 +51,14 @@ exports.LogoutFromAllDevices = function (req, res) {
 
 exports.Refresh = function (req, res) {
     try {
-        const refreshToken = req.body.token;
+        const refreshToken = req.body.refresh_token;
         if(refreshToken == null) return res.sendStatus(401);
         tokenModel.findOne({ token: refreshToken }, (err, data) => {
             if (err) {
                 res.send(err);
             }
             if (data == null) return res.sendStatus(403);
-            const user = { name: data.name, email: data.email, role: data.role };
-            const accessToken = jwt.generateAccessToken(user);
+            const accessToken = jwt.generateAccessToken(req.body);
             res.json({
                 accessToken: accessToken
             });
