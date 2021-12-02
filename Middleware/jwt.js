@@ -3,7 +3,7 @@ const ACCESS_TOKEN_SECRET = '43ffea19cec98caa1be960f2c76eac56983cd020c2962ce05f0
 const ACCESS_TOKEN_SECRET_REFRESH = '90953dad959b6eac56983cd020c296275aed6a658002745a8638b67c276cbe8be8c167243ffea19bb0147bbee2cec98caa1be960f2cce05f098730d3219e74c2'
 
 exports.generateAccessToken = (user) => {
-    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: '168h' })
 }
 
 exports.generateRefreshToken = (user) => {
