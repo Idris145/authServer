@@ -1,4 +1,4 @@
-var mongoUrl = 'mongodb+srv://HeelpMee:123456789a@cluster0.r4qwm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+var mongoUrl = 'mongodb+srv://bnw:bnw123456789@bnw.r4qwm.mongodb.net/test';
 var mongoose = require('mongoose');
 
 module.exports =function () {
